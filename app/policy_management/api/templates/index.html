@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMHCC Insurance Policy Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>TMHCC Insurance Policy Dashboard</h1>
+            <p>Real-time policy management system</p>
+        </header>
+
+        <!-- Search and Controls -->
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" 
+                       id="searchInput" 
+                       placeholder="Search by policy number..."
+                       onkeyup="handleSearchKeypress(event)">
+                <button onclick="searchPolicy()">Search</button>
+            </div>
+            <button onclick="loadAllPolicies()">Refresh All Policies</button>
+        </div>
+
+        <!-- Search Results -->
+        <div id="searchResults" class="hidden">
+            <h3>Search Result</h3>
+            <div id="singlePolicyResult"></div>
+        </div>
+
+        <!-- All Policies Section -->
+        <section>
+            <h2>All Policies</h2>
+            <div id="allPolicies">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Policy Number</th>
+                            <th>Insured Name</th>
+                            <th>Policy Type</th>
+                            <th>Premium</th>
+                            <th>Status</th>
+                            <th>Coverage Period</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="policiesTable"
+                           hx-get="/policies/" 
+                           hx-trigger="load">
+                        <tr>
+                            <td colspan="7" class="loading">Loading policies from API...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Policy Details Modal -->
+        <div id="policyModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Policy Details</h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                <div class="modal-body" id="policyDetails">
+                    <!-- Policy details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
