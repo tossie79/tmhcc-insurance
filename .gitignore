@@ -1,26 +1,52 @@
-# Byte-compiled / optimized / DLL files
+# ------------------------------
+# Python bytecode / cache
+# ------------------------------
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environment
+# ------------------------------
+# Virtual environments
+# ------------------------------
 venv/
 env/
 .venv/
 
-# SQLite database
+# ------------------------------
+# SQLite database files
+# ------------------------------
 *.db
+*.sqlite3
 
-# IDEs
-.vscode/
-.idea/
-
-# Python logs
+# ------------------------------
+# Logs
+# ------------------------------
 *.log
 
+# ------------------------------
 # Test coverage reports
+# ------------------------------
 htmlcov/
 .coverage
+.coverage.*
+.cache
+nosetests.xml
+pytest_cache/
 
+# ------------------------------
+# IDE / Editor specific
+# ------------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ------------------------------
 # pyenv local python version
+# ------------------------------
 .python-version
+
+# ------------------------------
+# Mac / OS generated files
+# ------------------------------
+.DS_Store
