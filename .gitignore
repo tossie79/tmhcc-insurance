@@ -21,3 +21,6 @@ env/
 # Test coverage reports
 htmlcov/
 .coverage
+
+# pyenv local python version
+.python-version
