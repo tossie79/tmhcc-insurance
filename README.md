@@ -67,7 +67,9 @@ Once running, access the system using these endpoints:
 
 * **Web Frontend:** `http://localhost:8000`
 * **API Documentation (Swagger/OpenAPI):** `http://localhost:8000/docs`
+* **Health Check** `http://localhost:8000/health`
 * **API v1 Base:** `http://localhost:8000/api/v1/policies`
+
 
 ---
 
@@ -80,6 +82,7 @@ Once running, access the system using these endpoints:
 | `/api/v1/policies/` | `GET` | List all policies |
 | `/api/v1/policies/{policy_number}` | `GET` | Retrieve a single policy by its policy number |
 | `/` | `GET` | Serve the frontend dashboard |
+| `/health` | `GET` | Quick health endpoint for basic uptime checking |
 
 ### Example Queries
 
@@ -123,7 +126,6 @@ python -m pytest tests/ -m "integration" -v
 python -m pytest tests/ -m "api" -v
 ```
 
-
  ## **Development**
   **Code Quality**
 Ensure code quality using the following commands for linting and formatting:
@@ -142,6 +144,33 @@ The system uses a normalized database design:
  - Foreign key constraints
  - Optimized indexes for common queries
  - Data validation at database level
+
+ ## Health Monitoring System
+
+**Basic Health Check**
+
+ - Location: api/routes/health.py
+ - Purpose: Quick API availability verification
+ - Usage: Simple endpoint returning service status
+
+**Comprehensive Health Monitoring**
+
+ - Location: scripts/automated_health_check.py
+ ```
+ python scripts/automated_health_check.py
+ ``` 
+ - Purpose: Full system validation and reporting
+ - **Output: Detailed health report with pass/fail status**
+ ```
+Checks Performed:
+ -  All API endpoints functionality
+ -  Frontend routes accessibility
+ -  Database connectivity and operations
+ -  System performance metrics
+ -  Error handling validation
+
+```
+
 
 ## **Potential Improvements**
   **Short-term**

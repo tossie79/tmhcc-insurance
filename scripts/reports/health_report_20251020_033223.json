@@ -1,0 +1,48 @@
+{
+  "timestamp": "2025-10-20T03:32:23.914603",
+  "services": {
+    "API Health": {
+      "status": "FAIL",
+      "message": "Connection failed: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f9628e8a710>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "details": null,
+      "timestamp": "2025-10-20T03:32:23.916702"
+    },
+    "Database": {
+      "status": "FAIL",
+      "message": "Database connection failed: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/policies/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f96289605d0>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "details": null,
+      "timestamp": "2025-10-20T03:32:23.917867"
+    },
+    "Policy Creation": {
+      "status": "FAIL",
+      "message": "Creation error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/policies/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f9628962590>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "details": null,
+      "timestamp": "2025-10-20T03:32:23.918774"
+    },
+    "Frontend Policies List": {
+      "status": "FAIL",
+      "message": "Load failed: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f9628949c10>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "details": null,
+      "timestamp": "2025-10-20T03:32:23.919962"
+    },
+    "Error Handling": {
+      "status": "FAIL",
+      "message": "Error test failed: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/policies/NON_EXISTENT_12345 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f962893a450>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "details": null,
+      "timestamp": "2025-10-20T03:32:23.921072"
+    },
+    "Performance http://localhost:8000/api/v1/policies/": {
+      "status": "FAIL",
+      "message": "Performance test failed: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/policies/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f9628961550>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "details": null,
+      "timestamp": "2025-10-20T03:32:23.922196"
+    },
+    "Performance http://localhost:8000/health": {
+      "status": "FAIL",
+      "message": "Performance test failed: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f96289706d0>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "details": null,
+      "timestamp": "2025-10-20T03:32:23.923360"
+    }
+  },
+  "overall_status": "UNHEALTHY"
+}

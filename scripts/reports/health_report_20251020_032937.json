@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-10-20T03:29:37.576877",
+  "services": {
+    "API Health": {
+      "status": "PASS",
+      "message": "API is healthy",
+      "details": {
+        "status": "healthy",
+        "service": "TMHCC Policy Management"
+      },
+      "timestamp": "2025-10-20T03:29:37.581636"
+    },
+    "Database": {
+      "status": "PASS",
+      "message": "Database connection successful",
+      "details": null,
+      "timestamp": "2025-10-20T03:29:37.600387"
+    },
+    "Policy Creation": {
+      "status": "FAIL",
+      "message": "Creation failed: HTTP 400",
+      "details": null,
+      "timestamp": "2025-10-20T03:29:37.613078"
+    },
+    "Frontend Policies List": {
+      "status": "PASS",
+      "message": "Page loaded successfully",
+      "details": null,
+      "timestamp": "2025-10-20T03:29:37.620428"
+    },
+    "Error Handling": {
+      "status": "PASS",
+      "message": "404 handled correctly",
+      "details": null,
+      "timestamp": "2025-10-20T03:29:37.628795"
+    },
+    "Performance http://localhost:8000/api/v1/policies/": {
+      "status": "PASS",
+      "message": "Response time: 0.01s",
+      "details": null,
+      "timestamp": "2025-10-20T03:29:37.642031"
+    },
+    "Performance http://localhost:8000/health": {
+      "status": "PASS",
+      "message": "Response time: 0.00s",
+      "details": null,
+      "timestamp": "2025-10-20T03:29:37.646234"
+    }
+  },
+  "overall_status": "DEGRADED"
+}
