@@ -5,30 +5,28 @@ from ..domain.value_objects import Money, PolicyNumber, Period
 
 """This file represents the Domain entity definitions for Policy Management"""
 
-"""Enumeration for different statuses of a policy"""
-
 
 class PolicyStatus(str, Enum):
+    """Enumeration for different statuses of a policy"""
+
     ACTIVE = "active"
     INACTIVE = "inactive"
     PENDING = "pending"
     CANCELLED = "cancelled"
 
 
-"""Enumeration for different types of policies"""
-
-
 class PolicyType(str, Enum):
+    """Enumeration for different types of policies"""
+
     PROPERTY = "Property"
     CASUALTY = "Casualty"
     MARINE = "Marine"
     CONSTRUCTION = "Construction"
 
 
-"""Policy domain entity representing an insurance policy"""
-
-
 class Policy:
+    """Policy domain entity representing an insurance policy"""
+
     def __init__(
         self,
         policy_number: PolicyNumber,
@@ -47,9 +45,8 @@ class Policy:
         self.policy_type = policy_type
         self.period = period
 
-    """String representation of the Policy entity"""
-
     def __repr__(self) -> str:
+        """String representation of the Policy entity"""
         return (
             f"Policy(id={self.id}, policy_number={self.policy_number}, "
             f"insured_name={self.insured_name}, premium={self.premium}, "
@@ -57,9 +54,8 @@ class Policy:
             f"period={self.period})"
         )
 
-    """Equality check based on all attributes"""
-
     def __eq__(self, other: object) -> bool:
+        """Equality check based on all attributes"""
         if not isinstance(other, Policy):
             return False
         return (
@@ -72,9 +68,8 @@ class Policy:
             and self.policy_type == other.policy_type
         )
 
-    """Activate the policy if it meets the criteria"""
-
     def activate(self) -> None:
+        """Activate the policy if it meets the criteria"""
         if self.status != PolicyStatus.PENDING:
             raise ValueError("Only pending policies can be activated")
 
@@ -85,9 +80,8 @@ class Policy:
             raise ValueError("Premium must be greater than zero to activate policy")
         self.status = PolicyStatus.ACTIVE
 
-    """Cancel the policy with an optional reason"""
-
     def cancel(self, reason: str | None = None) -> None:
+        """Cancel the policy with an optional reason"""
         if self.status in {PolicyStatus.CANCELLED, PolicyStatus.INACTIVE}:
             raise ValueError("Policy is already cancelled or inactive")
         self.status = PolicyStatus.CANCELLED

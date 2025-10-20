@@ -1,5 +1,5 @@
 // Insurance Policy Dashboard - JavaScript functionality
-// Read-only version - no activation functionality
+
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('TMHCC Insurance Dashboard initialized successfully!');
@@ -307,7 +307,7 @@ function loadAllPolicies() {
     document.getElementById('searchInput').value = '';
     
     // Use HTMX to reload the policies table
-    htmx.ajax('GET', '/policies/', {
+    htmx.ajax('GET', '/api/v1/policies/', {
         target: '#policiesTable',
         swap: 'none'
     }).then(() => {
@@ -331,7 +331,7 @@ function searchPolicy() {
     resultsDiv.classList.remove('hidden');
 
     // Use HTMX to fetch the single policy
-    htmx.ajax('GET', `/policies/${encodeURIComponent(policyNumber)}`, {
+    htmx.ajax('GET', `/api/v1/policies/${encodeURIComponent(policyNumber)}`, {
         target: '#singlePolicyResult',
         swap: 'none'
     });
@@ -366,7 +366,7 @@ function viewPolicyDetails(policyNumber) {
     console.log('Viewing details for policy:', policyNumber);
     
     // Use HTMX to load policy details into modal
-    htmx.ajax('GET', `/policies/${encodeURIComponent(policyNumber)}`, {
+    htmx.ajax('GET', `/api/v1/policies/${encodeURIComponent(policyNumber)}`, {
         target: '#policyDetails',
         swap: 'none'
     }).then(() => {

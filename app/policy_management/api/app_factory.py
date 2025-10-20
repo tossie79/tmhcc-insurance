@@ -42,7 +42,7 @@ def create_app(testing: bool = False) -> FastAPI:
 
     # Register all routes
     app.include_router(health_router, tags=["health"])
-    app.include_router(frontend_router, tags=["frontend"])
-    app.include_router(policies_router, tags=["policies"])
+    app.include_router(frontend_router)  # /policies
+    app.include_router(policies_router)  # /api/v1/policies
 
     return app

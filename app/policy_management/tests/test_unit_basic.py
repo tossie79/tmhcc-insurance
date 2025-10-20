@@ -8,13 +8,12 @@ from app.policy_management.domain.entities import Policy, PolicyStatus, PolicyTy
 from app.policy_management.domain.value_objects import PolicyNumber, Money, Period
 from app.policy_management.domain.repository import PolicyRepository
 
-"""Basic unit tests for core functionality"""
-
 
 class TestBasicUnit:
-    """Test creating a policy domain entity"""
+    """Basic unit tests for core functionality"""
 
     def test_policy_creation(self):
+        """Test creating a policy domain entity"""
         policy = Policy(
             policy_number=PolicyNumber("TEST00123"),
             insured_name="John Doe",
@@ -29,9 +28,8 @@ class TestBasicUnit:
         assert policy.premium.amount == 1000.0
         assert policy.status == PolicyStatus.PENDING
 
-    """Test activating a policy"""
-
     def test_policy_activation(self):
+        """Test activating a policy"""
         # Use a valid date range (end date after start date)
         start_date = date(2024, 1, 1)
         end_date = date(2026, 12, 31)
@@ -48,9 +46,8 @@ class TestBasicUnit:
         policy.activate()
         assert policy.status == PolicyStatus.ACTIVE
 
-    """Test PolicyService get operations with mock"""
-
     def test_get_policy_service(self):
+        """Test PolicyService get operations with mock"""
         from app.policy_management.application.policy_services import PolicyService
         from app.policy_management.api.schemas import CreatePolicyDTO
 
@@ -90,9 +87,8 @@ class TestBasicUnit:
         result = service.get_policy("NOTFOUND999")
         assert result is None
 
-    """Test listing policies with mock"""
-
     def test_list_policies_service(self):
+        """Test listing policies with mock"""
         from app.policy_management.application.policy_services import PolicyService
 
         mock_repo = Mock(spec=PolicyRepository)

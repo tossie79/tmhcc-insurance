@@ -9,11 +9,9 @@ from app.policy_management.domain.entities import PolicyStatus, PolicyType
 class TestBasicIntegration:
     """Basic integration tests with real database"""
 
-    """Fixture to provide PolicyService with real DB session"""
-
     @pytest.fixture
     def policy_service(self, db_session):
-
+        """Fixture to provide PolicyService with real DB session"""
         from app.policy_management.application.policy_services import PolicyService
         from app.policy_management.infrastructure.policy_repository import (
             SQLPolicyRepository,
@@ -22,9 +20,8 @@ class TestBasicIntegration:
         repository = SQLPolicyRepository(db_session)
         return PolicyService(repository)
 
-    """Test creating a policy and then retrieving it"""
-
     def test_create_and_get_policy(self, policy_service):
+        """Test creating a policy and then retrieving it"""
         from app.policy_management.api.schemas import CreatePolicyDTO
 
         # Create policy
@@ -50,15 +47,13 @@ class TestBasicIntegration:
         assert retrieved_policy.insured_name == "Integration Test"
         assert retrieved_policy.status == PolicyStatus.ACTIVE
 
-    """Test retrieving a policy that doesn't exist"""
-
     def test_get_nonexistent_policy(self, policy_service):
+        """Test retrieving a policy that doesn't exist"""
         result = policy_service.get_policy("DOESNOTEXIST")
         assert result is None
 
-    """Test listing all policies"""
-
     def test_list_policies(self, policy_service, db_session):
+        """Test listing all policies"""
         from app.policy_management.api.schemas import CreatePolicyDTO
         from app.policy_management.infrastructure.models import PolicyModel
 
@@ -104,9 +99,8 @@ class TestBasicIntegration:
         assert policy_dict["LIST001"].insured_name == "Customer One"
         assert policy_dict["LIST002"].insured_name == "Customer Two"
 
-    """Test listing when no policies exist"""
-
     def test_list_empty_policies(self, policy_service, db_session):
+        """Test listing when no policies exist"""
         from app.policy_management.infrastructure.models import PolicyModel
 
         # Clear all policies

@@ -6,10 +6,10 @@ from .db import Base
 
 """ORM models for Policy Management"""
 
-"""Policy Status Model"""
-
 
 class PolicyStatusModel(Base):
+    """Policy Status Model"""
+
     __tablename__ = "policy_statuses"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -20,10 +20,9 @@ class PolicyStatusModel(Base):
     policies = relationship("PolicyModel", back_populates="status_rel")
 
 
-"""Policy Type Model"""
-
-
 class PolicyTypeModel(Base):
+    """Policy Type Model"""
+
     __tablename__ = "policy_types"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -34,10 +33,9 @@ class PolicyTypeModel(Base):
     policies = relationship("PolicyModel", back_populates="type_rel")
 
 
-"""Policy Model"""
-
-
 class PolicyModel(Base):
+    """Policy Model"""
+
     __tablename__ = "policies"
 
     id = Column(Integer, primary_key=True, autoincrement=True)

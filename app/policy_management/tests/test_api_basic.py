@@ -1,13 +1,11 @@
 import pytest
 
 
-"""Basic API tests for GET endpoints in the Policy Management API"""
-
-
 class TestAPIGetEndpoints:
-    """Test getting a policy by policy number successfully"""
+    """Basic API tests for GET endpoints in the Policy Management API"""
 
     def test_get_policy_success(self, client):
+        """Test getting a policy by policy number successfully"""
         # First create a policy to retrieve
         policy_data = {
             "policy_number": "APIGET001",
@@ -20,42 +18,38 @@ class TestAPIGetEndpoints:
             "policy_type": "Property",
         }
 
-        create_response = client.post("/policies/", json=policy_data)
+        create_response = client.post("/api/v1/policies/", json=policy_data)
         assert create_response.status_code in [
             200,
             201,
         ], f"Create failed: {create_response.text}"
 
         # Then get it
-        response = client.get("/policies/APIGET001")
+        response = client.get("/api/v1/policies/APIGET001")
         assert response.status_code == 200
 
         data = response.json()
         assert data["policy_number"] == "APIGET001"
         assert data["insured_name"] == "API Get Test"
 
-    """Test getting a policy that doesn't exist"""
-
     def test_get_policy_not_found(self, client):
-        response = client.get("/policies/NONEXIST999")
+        """Test getting a policy that doesn't exist"""
+        response = client.get("/api/v1/policies/NONEXIST999")
         assert response.status_code == 404
         error_data = response.json()
         assert "detail" in error_data
         assert "Policy not found" in error_data["detail"]
 
-    """Test listing all policies"""
-
     def test_list_policies(self, client):
-        response = client.get("/policies/")
+        """Test listing all policies"""
+        response = client.get("/api/v1/policies/")
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, list)
 
-    """Test that list response has correct structure"""
-
     def test_list_policies_response_structure(self, client):
-
-        response = client.get("/policies/")
+        """Test that list response has correct structure"""
+        response = client.get("/api/v1/policies/")
         assert response.status_code == 200
         policies = response.json()
 
@@ -74,14 +68,12 @@ class TestAPIGetEndpoints:
 
     def test_get_policy_with_special_characters(self, client):
         """Test getting policy with special characters in policy number"""
-        response = client.get("/policies/SPECIAL123")
+        response = client.get("/api/v1/policies/SPECIAL123")
         assert response.status_code == 404
 
 
-"""Test complete API workflows for GET operations"""
-
-
 class TestAPIWorkflows:
+    """Test complete API workflows for GET operations"""
 
     def test_create_and_retrieve_workflow(self, client):
         """Test complete workflow: create policy then retrieve it"""
@@ -96,24 +88,22 @@ class TestAPIWorkflows:
             "policy_type": "Marine",
         }
 
-        create_response = client.post("/policies/", json=create_data)
+        create_response = client.post("/api/v1/policies/", json=create_data)
         assert create_response.status_code in [
             200,
             201,
         ], f"Create failed: {create_response.text}"
 
         # Retrieve by policy number
-        get_response = client.get("/policies/WORKFLOW001")
+        get_response = client.get("/api/v1/policies/WORKFLOW001")
         assert get_response.status_code == 200
 
         retrieved_data = get_response.json()
         assert retrieved_data["policy_number"] == "WORKFLOW001"
         assert retrieved_data["insured_name"] == "Workflow Test"
 
-    """Test retrieving multiple policies"""
-
     def test_multiple_retrieval_workflow(self, client):
-
+        """Test retrieving multiple policies"""
         policies_to_create = [
             {
                 "policy_number": "MULTI001",
@@ -139,13 +129,13 @@ class TestAPIWorkflows:
 
         # Create all policies
         for policy_data in policies_to_create:
-            response = client.post("/policies/", json=policy_data)
+            response = client.post("/api/v1/policies/", json=policy_data)
             assert response.status_code in [200, 201], f"Create failed: {response.text}"
 
         # Retrieve each one individually
         for policy_data in policies_to_create:
             policy_number = policy_data["policy_number"]
-            response = client.get(f"/policies/{policy_number}")
+            response = client.get(f"/api/v1/policies/{policy_number}")
             assert response.status_code == 200
             retrieved = response.json()
             assert retrieved["policy_number"] == policy_data["policy_number"]

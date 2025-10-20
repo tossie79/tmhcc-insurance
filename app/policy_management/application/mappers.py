@@ -4,14 +4,13 @@ from ..api.schemas import CreatePolicyDTO, PolicyDTO, MoneyDTO, PeriodDTO, FlatP
 from datetime import date
 from decimal import Decimal
 
-"""This class maps between Domain entities and API DTOs"""
-
 
 class PolicyDtoMapper:
-    """Create Policy entity from CreatePolicyDTO"""
+    """This class maps between Domain entities and API DTOs"""
 
     @staticmethod
     def create_entity_from_dto(create_policy_dto: CreatePolicyDTO) -> Policy:
+        """Create Policy entity from CreatePolicyDTO"""
         return Policy(
             policy_number=PolicyNumber(create_policy_dto.policy_number),
             insured_name=create_policy_dto.insured_name,
@@ -25,10 +24,9 @@ class PolicyDtoMapper:
             policy_type=PolicyType(create_policy_dto.policy_type.capitalize()),
         )
 
-    """Convert Policy domain entity to PolicyDTO"""
-
     @staticmethod
     def to_dto(policy: Policy) -> PolicyDTO:
+        """Convert Policy domain entity to PolicyDTO"""
         return PolicyDTO(
             id=policy.id,
             policy_number=policy.policy_number.value,
@@ -43,10 +41,9 @@ class PolicyDtoMapper:
             ),
         )
 
-    """Convert PolicyDTO to Policy domain entity"""
-
     @staticmethod
     def to_domain(policy_dto: PolicyDTO) -> Policy:
+        """Convert PolicyDTO to Policy domain entity"""
         return Policy(
             policy_number=PolicyNumber(policy_dto.policy_number),
             insured_name=policy_dto.insured_name,
@@ -57,10 +54,9 @@ class PolicyDtoMapper:
             id=policy_dto.id,
         )
 
-    """Convert Policy domain entity to flat dictionary for JSON response"""
-
     @staticmethod
     def to_dict(policy: Policy) -> dict:
+        """Convert Policy domain entity to flat dictionary for JSON response"""
         # Currency formatting
         currency_map = {"USD": "$", "GBP": "£", "EUR": "€", "JPY": "¥"}
 

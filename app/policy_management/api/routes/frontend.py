@@ -8,7 +8,7 @@ current_dir = os.path.dirname(__file__)
 templates_dir = os.path.join(current_dir, "..", "templates")
 templates = Jinja2Templates(directory=templates_dir)
 
-router = APIRouter()
+router = APIRouter(prefix="", tags=["frontend"])
 
 
 @router.get("/", response_class=HTMLResponse)
